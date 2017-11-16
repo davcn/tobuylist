@@ -1,0 +1,41 @@
+version: "2.0"
+services:
+ mysql:
+  image: mysql:5.7
+  container_name: mysql
+  volumes:
+    - /Users/dav/sw/mysql:/var/lib/mysql
+    - ./db:/docker-entrypoint-initdb.d
+  environment:
+    - MYSQL_ROOT_PASSWORD=toor
+    - MYSQL_DATABASE=testdb
+    - MYSQL_USER=admin
+    - MYSQL_PASSWORD=admin
+  ports:
+    - "3306:3306"
+  networks:
+    - my-net
+ db-service:
+  build: ./db-service
+  container_name: db-service
+  ports:
+    - "8301:8301"
+  networks:
+    - my-net
+  depends_on:
+    - "eureka"
+  links:
+   - eureka
+   - mysql
+ eureka:
+  build: ./eureka-service
+  container_name: eureka
+  ports:
+    - "8300:8300"
+  depends_on:
+    - "mysql"
+  networks:
+    - my-net
+
+networks:
+ my-net:

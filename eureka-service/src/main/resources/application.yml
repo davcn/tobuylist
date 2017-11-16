@@ -1,14 +1,18 @@
 spring:
   application:
-    name: eureka-service
+    name: eureka
 
 server:
-  port: 8302
+  port: 8300
 
 eureka:
+  instance:
+    hostname: eureka
   client:
     registerWithEureka: false
     fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://eureka:${server.port}/eureka/
     server:
       waitTimeInMsWhenSyncEmpty: 0
 
@@ -17,7 +21,7 @@ zuul:
   routes:
     db-service:
       path: /db-service/**
-      url: http://localhost:8300
+      url: http://db-service:8301
     stock-service:
       path: /products-service/**
-      url: http://localhost:8301
+      url: http://localhost:8302

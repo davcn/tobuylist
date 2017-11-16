@@ -3,7 +3,7 @@ package com.davcn.tobuylist.dbservice.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products", catalog = "test")
+@Table(name = "products", catalog = "testdb")
 public class Product {
 
     @Id

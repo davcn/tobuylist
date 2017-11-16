@@ -84,7 +84,7 @@ public class ProductsResourceTest {
                         any(HttpMethod.class),
                         any(),
                         any(ParameterizedTypeReference.class)
-                )).thenReturn(new ResponseEntity<List<Product>>());
+                )).thenReturn(new ResponseEntity<new HttpMethod.POST);
         mockMvc
                 .perform(post(ENDPOINT_API)
                         .contentType(MediaType.APPLICATION_JSON)
